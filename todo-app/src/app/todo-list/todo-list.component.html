@@ -1,0 +1,18 @@
+<div class="todo-container">
+  <h1>My To-Do List</h1>
+  <form (submit)="addTodo(); $event.preventDefault()">
+    <input [(ngModel)]="newTitle" name="title" placeholder="What’s next?" required />
+    <input type="date" [(ngModel)]="newDueDate" name="dueDate" />
+    <button type="submit">Add</button>
+  </form>
+  <ul>
+    <li *ngFor="let todo of todos">
+      <input type="checkbox" [checked]="todo.completed" (change)="toggle(todo.id)" />
+      <span [class.done]="todo.completed">{{ todo.title }}</span>
+      <small *ngIf="todo.dueDate">— due {{ todo.dueDate | date:'shortDate' }}</small>
+      <button (click)="remove(todo.id)">✕</button>
+    </li>
+  </ul>
+</div>
+
+
