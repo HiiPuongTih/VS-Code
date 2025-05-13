@@ -152,7 +152,7 @@ export class TodoListComponent implements OnInit, AfterViewInit {
       date.setDate(startDate.getDate() + i);
       this.weekDates.push({
         label: datePipe.transform(date, 'EEEE d MMMM y') || '',
-        value: date.toISOString().split('T')[0] // Store as ISO date string
+        value: date.toISOString().split('T')[0]
       });
     }
 
@@ -161,7 +161,6 @@ export class TodoListComponent implements OnInit, AfterViewInit {
 
   filterByDate() {
     if (!this.selectedDate) {
-      // No date filter active → show everything
       return this.todos;
     }
     const sel = new Date(this.selectedDate);
@@ -177,7 +176,6 @@ export class TodoListComponent implements OnInit, AfterViewInit {
   initializeChart() {
     const ctx = this.chartRef.nativeElement.getContext('2d');
 
-    // Create new chart
     this.chart = new Chart(ctx, {
       type: 'bar',
       data: this.getChartData(),

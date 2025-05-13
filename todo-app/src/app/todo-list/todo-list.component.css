@@ -173,7 +173,7 @@ tr:nth-child(even) {
   background-color: #f9f9f9;
 }
 
-/* Button adjustments */
+/* Button */
 td:last-child {
   width: 150px;
 }
@@ -209,9 +209,9 @@ td:last-child {
 
 .chart-container {
   position: relative;
-  max-width: 600px; /* Reduced from full width */
-  height: 300px; /* Reduced height */
-  margin: 2rem auto; /* Centered */
+  max-width: 600px;
+  height: 300px;
+  margin: 2rem auto;
   padding: 1rem;
   background: white;
   border-radius: 8px;
