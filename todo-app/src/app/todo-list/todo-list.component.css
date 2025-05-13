@@ -1,14 +1,231 @@
-.todo-container { max-width: 500px; margin: auto; padding: 1rem; font-family: Arial, sans-serif; }
-form { display: flex; gap: 0.5rem; margin-bottom: 1rem; }
-input[type="text"], input[type="date"] { flex: 1; padding: 0.5rem; }
-button { padding: 0.5rem 1rem; border: none; border-radius: 4px; cursor: pointer; }
-ul { list-style: none; padding: 0; }
-li { display: flex; align-items: center; padding: 0.5rem 0; border-bottom: 1px solid #ddd; }
-li .done { text-decoration: line-through; color: #888; }
-li button { margin-left: auto; background: transparent; color: red; font-size: 1rem; }
+/*For the Header name and status part*/
+.header-section {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.header-content {
+  text-align: center;
+  max-width: 800px;
+  width: 100%;
+}
+
+.status-cards {
+  justify-content: center;
+}
+
+/*For the Title part*/
+.date-selector-container {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.date-dropdown {
+  font-size: 1.2rem;
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: 2px solid #3f51b5;
+  min-width: 300px;
+  text-align: center;
+}
+
+.date-dropdown option {
+  font-size: 1rem;
+  padding: 8px;
+}
+
+/*For the to-do-list part*/
+.todo-container {
+  max-width: 500px;
+  margin: auto;
+  padding: 1rem;
+  font-family: Arial, sans-serif;
+}
+
+form {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+input[type="text"],
+input[type="date"] {
+  flex: 1;
+  padding: 0.5rem;
+}
+
+button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #ddd;
+}
+
+li .done {
+  text-decoration: line-through;
+  color: #888;
+}
+
+li button {
+  margin-left: auto;
+  background: transparent;
+  color: red;
+  font-size: 1rem;
+}
 
 .done {
   text-decoration: line-through;
   color: gray;
 }
 
+.status-cards {
+  display: flex;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.card {
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  color: white;
+}
+
+.orange {
+  background-color: #ff9800;
+}
+
+.green {
+  background-color: #4CAF50;
+}
+
+.red {
+  background-color: #f44336;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+}
+
+th,
+td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+tr:hover {
+  background-color: #f5f5f5;
+}
+
+
+.edit-input {
+  padding: 0.25rem;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  width: 100%;
+}
+
+button {
+  margin: 0 0.25rem;
+  transition: opacity 0.2s;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+/* Update table styles */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+  border: 1px solid #ddd;
+}
+
+th, td {
+  padding: 12px 15px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+th {
+  background-color: #f8f9fa;
+  font-weight: 600;
+}
+
+tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+/* Button adjustments */
+td:last-child {
+  width: 150px;
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 8px;
+}
+
+.remove-btn {
+  margin-left: auto;
+  order: 2;
+  background-color: #f44336;
+  color: white;
+}
+
+.edit-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.save-btn {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.cancel-btn {
+  background-color: #f44336;
+  color: white;
+}
+
+.chart-container {
+  position: relative;
+  max-width: 600px; /* Reduced from full width */
+  height: 300px; /* Reduced height */
+  margin: 2rem auto; /* Centered */
+  padding: 1rem;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+#chart {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+
+.current-date {
+  font-size: 1.2rem;
+  color: #666;
+  margin-top: 0.5rem;
+} 

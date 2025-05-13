@@ -33,17 +33,46 @@ export class TodoService {
     this.save();
   }
 
-  toggleCompleted(id: number): void {
-    const todo = this.todos.find(t => t.id === id);
-    if (todo) {
-      todo.completed = !todo.completed;
-      this.save();
-    }
+
+  getStatusCounts() {
+    const now = new Date();
+    return {
+      todo: this.todos.filter(t =>
+        !t.completed &&
+        t.dueDate &&
+        new Date(t.dueDate) > now
+      ).length,
+      completed: this.todos.filter(t => t.completed).length,
+      overdue: this.todos.filter(t =>
+        !t.completed &&
+        t.dueDate &&
+        new Date(t.dueDate) < now
+      ).length
+    };
   }
 
   removeTodo(id: number): void {
     this.todos = this.todos.filter(t => t.id !== id);
     this.save();
+  }
+
+
+  updateTodo(updatedTodo: Todo): void {
+    const index = this.todos.findIndex(t => t.id === updatedTodo.id);
+    if (index > -1) {
+      this.todos[index] = updatedTodo;
+      this.save();
+    }
+  }
+
+  getTodosByDay(day: Date): Todo[] {
+    return this.todos.filter(t =>
+      t.dueDate === this.formatDate(day)
+    );
+  }
+
+  private formatDate(date: Date): string {
+    return date.toISOString().split('T')[0];
   }
 
   private save(): void {

@@ -1,18 +1,79 @@
+<div class="header-section">
+  <div class="header-content">
+    <h2>Hello Puong Tih</h2>
+    <div class="status-cards">
+      <div class="card orange">To Do: {{ todoCounts.todo }}</div>
+      <div class="card green">Completed: {{ todoCounts.completed }}</div>
+      <div class="card red">Overdue: {{ todoCounts.overdue }}</div>
+    </div>
+  </div>
+</div>
+
 <div class="todo-container">
-  <h1>My To-Do List</h1>
+
+  <div class="header">
+    <h1>Todo List</h1>
+    <div class="date-display">
+      {{ currentDate | date:'EEEE, MMMM d, y' }}
+    </div>
+  </div>
   <form (submit)="addTodo(); $event.preventDefault()">
     <input [(ngModel)]="newTitle" name="title" placeholder="What’s next?" required />
     <input type="date" [(ngModel)]="newDueDate" name="dueDate" />
     <button type="submit">Add</button>
   </form>
-  <ul>
-    <li *ngFor="let todo of todos">
-      <input type="checkbox" [checked]="todo.completed" (change)="toggle(todo.id)" />
-      <span [class.done]="todo.completed">{{ todo.title }}</span>
-      <small *ngIf="todo.dueDate">— due {{ todo.dueDate | date:'shortDate' }}</small>
-      <button (click)="remove(todo.id)">✕</button>
-    </li>
-  </ul>
+
+
+  <table>
+    <thead>
+      <tr>
+        <th>No.</th>
+        <th>Activity</th>
+        <th>Due Date</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let todo of filteredTodos; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>
+          <span *ngIf="editingTodo?.id !== todo.id">{{ todo.title }}</span>
+          <input *ngIf="editingTodo?.id === todo.id" [(ngModel)]="editedTitle" class="edit-input">
+        </td>
+        <td>
+          <span *ngIf="editingTodo?.id !== todo.id">
+            {{ todo.dueDate | date:'shortDate' }}
+          </span>
+          <input *ngIf="editingTodo?.id === todo.id" type="date" [(ngModel)]="editedDueDate" class="edit-input">
+        </td>
+        <td>
+          <span [ngClass]="getStatusClass(todo)">
+            {{ getStatusText(todo) }}
+          </span>
+        </td>
+        <td>
+          <button (click)="toggleStatus(todo)" [class]="todo.completed ? 'completed' : 'pending'">
+            {{ todo.completed ? '✓' : 'Mark Done' }}
+          </button>
+        </td>
+        <td>
+          <div *ngIf="editingTodo?.id !== todo.id; else editActions" class="action-buttons">
+            <button (click)="startEdit(todo)">Edit</button>
+            <button class="remove-btn" (click)="remove(todo.id)">×</button>
+          </div>
+          <ng-template #editActions>
+            <div class="edit-actions">
+              <button (click)="saveEdit()" class="save-btn">Save</button>
+              <button (click)="cancelEdit()" class="cancel-btn">Cancel</button>
+            </div>
+          </ng-template>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>
 
-
+<div class="chart-container">
+  <canvas #chartCanvas width="800" height="400"></canvas>
+</div>
