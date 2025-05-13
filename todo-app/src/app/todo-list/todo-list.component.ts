@@ -65,6 +65,8 @@ export class TodoListComponent implements OnInit, AfterViewInit {
       this.todos = this.todoService.getTodos();
       this.filteredTodos = [...this.todos];
       this.updateCounts();
+
+      this.updateChart();
       this.newTitle = '';
       this.newDueDate = '';
     }
@@ -76,6 +78,7 @@ export class TodoListComponent implements OnInit, AfterViewInit {
     this.todos = this.todoService.getTodos();
     this.filteredTodos = this.filteredTodos.filter(t => t.id !== id);
     this.updateCounts();
+    this.updateChart();
   }
 
   toggleStatus(todo: Todo) {
@@ -121,7 +124,11 @@ export class TodoListComponent implements OnInit, AfterViewInit {
       this.todoService.updateTodo(updatedTodo);
       this.todos = this.todoService.getTodos();
       this.filterByDate();
+
       this.cancelEdit();
+
+      this.initializeChart();
+
     }
   }
 
@@ -153,20 +160,18 @@ export class TodoListComponent implements OnInit, AfterViewInit {
   }
 
   filterByDate() {
-    const selectedDateObj = new Date(this.selectedDate);
-
-    this.filteredTodos = this.todos.filter(todo => {
-      if (!todo.dueDate) return false;
-      const todoDate = new Date(todo.dueDate);
-
-      return (
-        todoDate.getFullYear() === selectedDateObj.getFullYear() &&
-        todoDate.getMonth() === selectedDateObj.getMonth() &&
-        todoDate.getDate() === selectedDateObj.getDate()
-      );
+    if (!this.selectedDate) {
+      // No date filter active → show everything
+      return this.todos;
+    }
+    const sel = new Date(this.selectedDate);
+    return this.todos.filter(t => {
+      if (!t.dueDate) return false;
+      const d = new Date(t.dueDate);
+      return d.getFullYear() === sel.getFullYear()
+        && d.getMonth() === sel.getMonth()
+        && d.getDate() === sel.getDate();
     });
-
-    this.updateCounts();
   }
 
   initializeChart() {
